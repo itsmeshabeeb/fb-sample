@@ -1,0 +1,133 @@
+{% extends 'dashboard.html' %} {% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    .ij {
+      width: 242px;
+      height: 40px;
+      border-radius: 6px;
+      border: 1px solid rgb(214, 214, 214);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="col-lg-9">
+    <form action="editprofile" method="POST">
+      {% csrf_token %}
+      <div class="mb-3">
+        <button class="btn btn-secondary">Upload</button>
+      </div>
+      <div class="row">
+        <div class="col mb-3">
+          <input type="text" class="form-control" name="fname" placeholder="First name" aria-label="First name" />
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" name="sname" placeholder="Last name" aria-label="Last name" />
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="formGroupExampleInput" class="form-label">Email/Contact
+          <span style="color: red">(if you update this the user name will also change)</span></label>
+        <input type="text" name="email" class="form-control" id="formGroupExampleInput"
+          placeholder="Example input placeholder" />
+      </div>
+      <p><b>Date of birth</b></p>
+      <div>
+        <select class="ij" name="day" id="day">
+        </select>
+        <select class="ij" name="month" id="month">
+        </select>
+        <select class="ij" name="year" id="year">
+        </select>
+      </div>
+
+      <p><b>Gender</b></p>
+
+      <input type="radio" name="i" />
+      <label for="">Male</label>
+      <input type="radio" name="i" />
+      <label for="">Female</label>
+
+      <br />
+      <br />
+
+      <button class="butn" type="reset">Cancel</button>
+      <button class="butn" type="submit">Change</button>
+      <span style="color: green;">{{msms}}</span>
+      <span style="color: red;">{{msmsm}}</span>
+    </form>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ];
+      let qntYears = 50;
+      let selectYear = $("#year");
+      let selectMonth = $("#month");
+      let selectDay = $("#day");
+      let currentYear = new Date().getFullYear();
+
+      for (var y = 0; y < qntYears; y++) {
+        let date = new Date(currentYear);
+        let yearElem = document.createElement("option");
+        yearElem.value = currentYear
+        yearElem.textContent = currentYear;
+        selectYear.append(yearElem);
+        currentYear--;
+      }
+
+      for (var m = 0; m < 12; m++) {
+        let month = monthNames[m];
+        let monthElem = document.createElement("option");
+        monthElem.value = m;
+        monthElem.textContent = month;
+        selectMonth.append(monthElem);
+      }
+
+      var d = new Date();
+      var month = d.getMonth();
+      var year = d.getFullYear();
+      var day = d.getDate();
+
+      selectYear.val(year);
+      selectYear.on("change", AdjustDays);
+      selectMonth.val(month);
+      selectMonth.on("change", AdjustDays);
+
+      AdjustDays();
+      selectDay.val(day)
+
+      function AdjustDays() {
+        var year = selectYear.val();
+        var month = parseInt(selectMonth.val()) + 1;
+        selectDay.empty();
+
+        //get the last day, so the number of days in that month
+        var days = new Date(year, month, 0).getDate();
+
+        //lets create the days of that month
+        for (var d = 1; d <= days; d++) {
+          var dayElem = document.createElement("option");
+          dayElem.value = d;
+          dayElem.textContent = d;
+          selectDay.append(dayElem);
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
+
+{% endblock %}

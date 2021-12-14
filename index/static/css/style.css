@@ -1,0 +1,59 @@
+body{
+    background-color: #F0F2F5;
+    box-sizing: border-box;
+    width: 100%;
+}
+header {
+    background: #3b5998;
+    padding-top: 20px;
+    color: white;
+}
+
+header .form-group {
+    margin-bottom: 0px;
+}
+
+header .btn-header-login {
+    margin-bottom: 15px;
+}
+
+.multibox {
+    padding-left: 0px;
+    padding-bottom: 10px;
+}
+
+.login-main span {
+    font-size: 12px;
+}
+
+.logo {
+    font-size: 40px;
+    padding-bottom: 20px;
+    font-weight: 600;
+}
+
+.btn btn-primary {
+    color: white;
+}
+
+.image {
+    margin: 150px 0 0 100px;
+
+}
+
+.formarea {
+    padding:20px 10px 0px 0px;
+    margin: 30px 30px 30px 0px;
+}
+/* .row g-3{
+    margin-top: 50px;
+} */
+.dob{
+    margin-top: 25px;
+}
+.subhead{
+    margin-bottom: 40px;
+}
+.gender{
+    margin: 20px 0px 20px 0px;
+}
